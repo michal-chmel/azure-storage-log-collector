@@ -60,7 +60,7 @@ STORAGE_ACCOUNT_KEY:m17SHFrY36nj888888+9K90LtZQZYycpZ//WPacPQUTWR01vjEnESTaQK4f/
 COLLECTED_TABLES:WADWindowsEventLogsTable,WADDiagnosticInfrastructureLogsTable,WADPerformanceCountersTable
 ```
 ### Run the script
-After you have prepared the config file. You are ready to run the script. Using the command line or PowerShell ISE run the collector.ps1 script.
+After you have prepared the config file. You are ready to run the script. Moved the script and the config file to a dedicated server. Using the command line or PowerShell ISE run the collector.ps1 script.
 
 The script will use current date and time and collect all data since this instance. After sending the data into Log Analytics, it will save the last data timestamp into a local database file and will use this timestamp as default during the next time.
 
