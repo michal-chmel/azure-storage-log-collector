@@ -26,19 +26,19 @@ We will need to get:
 **Log Analytics Workspace ID and Key**
 Navigate to your Workspace in Azure and select 'Agents' section under 'Settings' in the left menu. Within the Agents settings expand 'Log Analytics agent instructions' and reveal the ID and Key.
 
-![alt text](pictures/workspace_info.png)
+<img src="pictures/workspace_info.png" width="400">
 
 **Storage Account Access Key**
 Navigate to the storage Account in Azure Stack Hub you would like to start collecting the Log tables from and select section 'Access keys' in the left menu 'Settings'. Show the keys and select one.
 
-![alt text](pictures/access_keys.png)
+<img src="pictures/access_keys.png" width="400">
 
 **Storage Account Table Names**
 Collect table names from the storage account you would like to forward to the Log Analytics Workspace. The talbes are found in the 'Table service' section in the storage account.
 
 **Note!** The table names vary based on the type of service which is sending its logs.
 
-![alt text](pictures/table_service.png)
+<img src="pictures/table_service.png" width="300">
 
 ### Prepare the config file
 The script reads input data from a config file. This config file has a predifined structure and must be present and filled in order to collect the log table data.
