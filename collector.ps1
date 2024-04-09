@@ -1,8 +1,8 @@
 Function Log {
     param (
-    [string]$Text, 
-    [string]$Path = $PSScriptRoot)
-    if (! (Test-Path "$Path/log.txt")) {New-Item -Path "$Path/log.txt" -ItemType File -Force | Out-Null}
+        [string]$Text, 
+        [string]$Path = $PSScriptRoot)
+    if (! (Test-Path "$Path/log.txt")) { New-Item -Path "$Path/log.txt" -ItemType File -Force | Out-Null }
     Write-Host "$(Get-Date) - $Text"
     ("$(Get-Date) - $Text") | Out-File "$Path/log.txt" -Append -Force
 }
@@ -15,8 +15,7 @@ Function Setup-Collector {
         $Template = @"
 WORKSPACE_ID:
 WORKSPACE_KEY:
-STORAGE_ACCOUNT:
-STORAGE_ACCOUNT_KEY:
+CONNECTION_STRING:
 COLLECTED_TABLES:
 "@
         Set-Content -Value $Template -Path "$Path\config"
@@ -43,17 +42,16 @@ Function Get-Config ($Path) {
         New-Variable -Name $var[0] -Value $var[1]
     }
     $Output = @{
-        WorkspaceId       = $WORKSPACE_ID
-        WorkspaceKey      = $WORKSPACE_KEY
-        StorageAccount    = $STORAGE_ACCOUNT
-        StorageAccountKey = $STORAGE_ACCOUNT_KEY
-        CollectedTables   = $COLLECTED_TABLES
+        WorkspaceId      = $WORKSPACE_ID
+        WorkspaceKey     = $WORKSPACE_KEY
+        ConnectionString = $CONNECTION_STRIN
+        CollectedTables  = $COLLECTED_TABLES
     }
     Write-Output $Output
 }
  
 Function Get-StorageContext ($Config) {
-    $Context = New-AzStorageContext -StorageAccountName $Config.StorageAccount -StorageAccountKey $Config.StorageAccountKey
+    $Context = New-AzStorageContext -ConnectionString $Config.ConnectionString
     Write-Output $Context
 }
 
@@ -93,7 +91,7 @@ Function Set-Database($Files, $Config, $CloudTable, $LatestTimeStamp, $NewTimeSt
         $String = "$($Config.StorageAccount);$($CloudTable.Name);$LatestTimeStamp"
         $NewString = "$($Config.StorageAccount);$($CloudTable.Name);$NewTimeStamp"
 
-        $Content = (Get-Content $Files.DatabasePath).Replace($String,$NewString)
+        $Content = (Get-Content $Files.DatabasePath).Replace($String, $NewString)
         Set-Content "$($Files.DatabasePath)" $Content
     }
     Log("set: new timestamp:$NewTimeStamp for table:$($CloudTable.Name) on storageaccount:$($Config.StorageAccount).")
