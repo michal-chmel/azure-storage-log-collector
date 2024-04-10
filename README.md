@@ -10,7 +10,7 @@ The script loads defined tables' rows stores the latest timestamp in a local tex
 
 ## Server Prerequisites
 - Windows Server with network access to Azure Stack Hub target storage account.
-- PowerShell 5.1 with Az and AzureStack modules.
+- PowerShell 5.1 with **Az**, **AzTable** and **AzureStack** modules.
 
 **Tip!** to properly setup PowerShell to work with Azure Stack Hub follow this tutorial: https://learn.microsoft.com/en-us/azure-stack/operator/powershell-install-az-module?view=azs-2311.
 
@@ -20,16 +20,15 @@ In order to start collecting the data we first need to setup our config file.
 We will need to get:
 - Log Analytics Workspace ID (Azure)
 - Log Analytics Workspace Key (Azure)
-- Source Storage Account Name (Azure Stack Hub)
-- Source Storage Account Access Key (Azure Stack Hub)
+- Connection Storage (Azure Stack Hub)
   
 **Log Analytics Workspace ID and Key**
 Navigate to your Workspace in Azure and select 'Agents' section under 'Settings' in the left menu. Within the Agents settings expand 'Log Analytics agent instructions' and reveal the ID and Key.
 
 <img src="pictures/workspace_info.png" width="400">
 
-**Storage Account Access Key**
-Navigate to the storage Account in Azure Stack Hub you would like to start collecting the Log tables from and select section 'Access keys' in the left menu 'Settings'. Show the keys and select one.
+**Storage Account Connection String**
+Navigate to the storage Account in Azure Stack Hub you would like to start collecting the Log tables from and select section 'Access keys' in the left menu 'Settings'. Show the keys and select Connection string.
 
 <img src="pictures/access_keys.png" width="400">
 
@@ -55,8 +54,7 @@ Fill in the config file with the data received from the previous steps.
 ```
 WORKSPACE_ID:ffd210d2-0628-41fe-bcdd-1348888e14f
 WORKSPACE_KEY:ANEtg2PEjR5CCgVj3z4lzM2pRXPh8W8888gJwSqpw3Czv5U5t221MZJZtHRSpui4qyaV0elS398oZzmdHcwvhQ==
-STORAGE_ACCOUNT:rgmonitorvmguestdiag
-STORAGE_ACCOUNT_KEY:m17SHFrY36nj888888+9K90LtZQZYycpZ//WPacPQUTWR01vjEnESTaQK4f/bXHlfPz+aoKdsbVJJCK+VI+MZRA==
+CONNECTION_STRING:DefaultEndpointsProtocol=https;AccountName=satestacc;AccountKey=cmzbs/Z2jjlidncaa5EYRNi0oXyXhN+f52iJ/0/TlYSz4Jn+n/AbIGaxv/vK43apUV7Yj+ASt/OUrwA==;EndpointSuffix=core.windows.net
 COLLECTED_TABLES:WADWindowsEventLogsTable,WADDiagnosticInfrastructureLogsTable,WADPerformanceCountersTable
 ```
 ### Run the script
