@@ -20,7 +20,7 @@ In order to start collecting the data we first need to setup our config file.
 We will need to get:
 - Log Analytics Workspace ID (Azure)
 - Log Analytics Workspace Key (Azure)
-- Connection Storage (Azure Stack Hub)
+- Connection String (Azure Stack Hub)
   
 **Log Analytics Workspace ID and Key**
 Navigate to your Workspace in Azure and select 'Agents' section under 'Settings' in the left menu. Within the Agents settings expand 'Log Analytics agent instructions' and reveal the ID and Key.
