@@ -40,8 +40,8 @@ Function Get-Config ($Path) {
     Get-Content $Path | Foreach-Object { 
         $var = $_.Split(':') 
         New-Variable -Name $var[0] -Value $var[1]
-        $STORAGE_ACCOUNT = $ConnectionString.Split(';').Split('=')[3] 
     }
+    $STORAGE_ACCOUNT = $CONNECTION_STRING.Split(';').Split('=')[3] 
     $Output = @{
         WorkspaceId      = $WORKSPACE_ID
         WorkspaceKey     = $WORKSPACE_KEY
